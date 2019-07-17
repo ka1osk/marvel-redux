@@ -10,7 +10,7 @@ import reducers from './ducks';
 import sagas from './sagas';
 
 const persistConfig = {
-  key: 'somnio',
+  key: 'chave',
   storage,
   whitelist: ['auth']
 }

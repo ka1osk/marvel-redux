@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux';
 
 import { Creators as AuthActions } from "../../store/ducks/auth";
 
-// import Document from '../../components/Document';
-
 const Home = ({ usuario, token, isProcessing, error, doLogin }) => { 
   return (
     <div>
@@ -15,7 +13,6 @@ const Home = ({ usuario, token, isProcessing, error, doLogin }) => {
       {isProcessing && (<p>Aguarde....</p>)}
       {error && (<p>{error}</p>)}
     </div>
-    // <Document/>
   );
 }
 

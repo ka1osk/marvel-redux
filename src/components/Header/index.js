@@ -5,7 +5,7 @@ import { Container, AppName } from './styles';
 const Header = ({ usuario }) => {
   return (
     <Container>
-      <AppName>Somnio</AppName>      
+      <AppName>Template</AppName>      
     </Container>
   );
 }

@@ -5,7 +5,7 @@ import api from '../../services/api';
 
 function* doLogin() {
   try {
-    const { data } = yield call(api.post, '/auth', { email: 'adm@somnio.com.br', senha: '123456' });
+    const { data } = yield call(api.post, '/auth', { email: 'adm@email.com.br', senha: '123456' });
 
     yield put({ type: AuthTypes.SUCCESS_LOGIN, payload: { data } });
 
