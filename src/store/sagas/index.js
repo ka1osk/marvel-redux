@@ -1,10 +1,10 @@
 import { all, fork } from "redux-saga/effects";
-import * as auth from './auth';
+import * as characters from './characters';
 
 export default function* root() {
   yield all(
     [
-      ...Object.values(auth)
+      ...Object.values(characters)
     ].map(fork)
   );
 }

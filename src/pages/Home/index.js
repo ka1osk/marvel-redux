@@ -1,23 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Search from "components/Search";
+import CardList from "components/CardList";
+import Card from "components/Card";
+import { Creators as Actions } from "../../store/ducks/characters";
 
-import { Creators as AuthActions } from "../../store/ducks/auth";
+export default ({ usuario, token, isProcessing, error, doLogin }) => { 
+  const dispatch = useDispatch();
+  const characters = useSelector(state => state.characters);
 
-const Home = ({ usuario, token, isProcessing, error, doLogin }) => { 
+  useEffect(() => {
+    dispatch(Actions.getCharacters())
+  }, [])
+
   return (
-    <div>
-      <p>{usuario && JSON.stringify(usuario)}</p>
-      <p>Token: {token}</p>
-      <button onClick={() => doLogin()}>Login</button>
-      {isProcessing && (<p>Aguarde....</p>)}
-      {error && (<p>{error}</p>)}
-    </div>
+    <>
+      <Search />
+      <CardList>
+        {characters.characters.map(character => (
+          <Card key={character.id} {...character} />
+        ))}
+      </CardList>
+    </>
   );
 }
-
-const mapStateToProps = state => (state.auth);
-
-const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
