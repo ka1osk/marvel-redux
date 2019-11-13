@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Colors } from "styles";
+import { Colors } from "Styles";
 
 export const Container = styled.div`
   margin-bottom: 20px;

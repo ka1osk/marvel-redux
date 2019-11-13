@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from "react-router-dom";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { MdArrowBack, MdEdit } from "react-icons/md";
 import { useHistory } from "react-router-dom";
+import { Creators as Actions } from "store/ducks/characters";
 import {
   Container,
   TitleContainer,
@@ -20,16 +20,21 @@ import {
 } from "./styles";
 
 export default () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const { id } = useParams();
-  const characters = useSelector(state => state.characters);
+  const charactersState = useSelector(state => state.characters);
+  const { selectedCharacter: character } = charactersState;
 
   return (
     <Container>
       <ContentContainer>
         <ImageContainer>
-          <ImageContainerbackGround src={character.thumbnail} />
-          <Image src={character.thumbnail} />
+          <ImageContainerbackGround
+            src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+          />
+          <Image
+            src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+          />
           <TitleContainer>
             <BackButton
               onClick={() => history.goBack()}
@@ -42,20 +47,22 @@ export default () => {
           </TitleContainer>
         </ImageContainer>
         <ButtonEdit
-          onClick={() => history.push(`/character/${id}/edit`)}
+          onClick={() => dispatch(Actions.editCharacter(character))}
           alt={"alterar"}
           title={"alterar"}
         >
-          <MdEdit />
+          <MdEdit /> alterar
         </ButtonEdit>
         <Content>{character.description}</Content>
-        {character.series && (
+        {charactersState.selectedCharacter.series.items && (
           <>
             <SeriesTitle>Séries:</SeriesTitle>
             <SeriesList>
-              {character.series.map((serie, index) => (
-                <SeriesItem key={index}>{serie.name}</SeriesItem>
-              ))}
+              {charactersState.selectedCharacter.series.items.map(
+                (serie, index) => (
+                  <SeriesItem key={index}>{serie.name}</SeriesItem>
+                )
+              )}
             </SeriesList>
           </>
         )}
