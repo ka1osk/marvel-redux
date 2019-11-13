@@ -13,7 +13,7 @@ export default ({ id, name, thumbnail, ...rest }) => {
   };
 
   return (
-    <Container>
+    <Container data-testid="character-card">
       <Title>{name}</Title>
       <Image src={`${thumbnail.path}.${thumbnail.extension}`} />
       <Button onClick={handleOnClick}>Detalhes</Button>
